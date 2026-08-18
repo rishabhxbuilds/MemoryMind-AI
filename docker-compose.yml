@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  backend:
+    image: placeholder-backend
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PLACEHOLDER=1
+
+  frontend:
+    image: placeholder-frontend
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - PLACEHOLDER=1
+
+  database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=memorymind
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
